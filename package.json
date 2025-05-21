@@ -1,0 +1,23 @@
+{
+  "name": "taskmanager",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/almortensen/taskmanager#readme",
+  "bugs": {
+    "url": "https://github.com/almortensen/taskmanager/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/almortensen/taskmanager.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^36.2.1"
+  }
+}

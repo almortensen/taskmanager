@@ -11,27 +11,68 @@ async function startProgram(){
 }
 // this function will make all task in the slected catigory 
 async function makeTaskofSelectedCAT(catPOS){
-    const data = fetch('taskData.json');
+    const data = await fetch('taskData.json');
     let dataJSON = await data.json();
     for(task of dataJSON.cat[catPOS].task_List){
-    let task = document.createElement("div");
-    task.style.backgroundColor = "rgb(22,22,22)";
-    task.style.display = "grid"
-    task.style.gridTemplateRows = "50% 50%";
-    task.style.gridTemplateColumns = "50% 50%";
-    task.style.borderRadius = "25%";
-    task.style.borderTopColor = `rgb(${dataJSON.cat[catPOS].colorRGB})`;
-    task.style.borderRightColor = `rgb(${dataJSON.cat[catPOS].colorRGB})`;
+        console.log(task);
+        let taskBlock = document.createElement("div");
+        taskBlock.style.backgroundColor = "rgb(22,22,22)";
+        taskBlock.style.display = "grid"
+        taskBlock.style.gridTemplateRows = "50% 50%";
+        taskBlock.style.gridTemplateColumns = "50% 50%";
+        taskBlock.style.borderRadius = "25%";
+        taskBlock.style.borderTopColor = `rgb(${dataJSON.cat[catPOS].colorRGB})`;
+        taskBlock.style.borderRightColor = `rgb(${dataJSON.cat[catPOS].colorRGB})`;
+        taskBlock.style.height = "15vh";
+        taskBlock.style.width = "25vw";
 
-    let taskName = document.createElement("p");
-    let timeSpent = document.createElement("p");
-    let pointsWorth = document.createElement("p")
-    let selectTask = document.createElement("button");
+        let taskName = document.createElement("p");
+        taskName.innerText = `${task.taskName}`;
+        taskName.style.gridRow = "1";
+        taskName.style.gridColumn = "1";
+        taskBlock.appendChild(taskName);
 
-    taskName.innerText = `${task.taskName}`;
-    pointsWorth.innerText = `${task.pointsWorth}`;
-    
+        let timeSpent = document.createElement("p");
 
+        let time = task.timeSpentSEC;
+
+        let timeDisplay = [0,0,0];
+
+        while(time > 0){
+            if(time > 3600){
+                time -= 3600;
+                timeDisplay[0]++;
+            }else if(time > 60){
+                time -= 60;
+                timeDisplay[1]++;
+            }else if(time > 1){
+                time -= 1
+                timeDisplay[2]++;
+            }
+        }
+
+        timeSpent.innerText = `time:${timeDisplay[0]}:${timeDisplay[1]}:${timeDisplay[2]}`
+        timeSpent.style.gridRow = "2";
+        timeSpent.style.gridColumn = "1";
+        taskBlock.appendChild(timeSpent);
+
+        let pointsWorth = document.createElement("p");
+        pointsWorth.innerText = `${task.pointsWorth}`;
+        pointsWorth.style.gridRow = "1";
+        pointsWorth.style.gridColumn = "2";
+        taskBlock.appendChild(pointsWorth);
+
+        let selectTask = document.createElement("button");
+        selectTask.style.gridRow = "2";
+        selectTask.style.gridColumn = "2";
+        selectTask.style.width = '100%';
+        selectTask.addEventListener("click",selectTask(task.POS));
+
+        taskBlock.appendChild(selectTask);
+       
+       
+        
+        document.getElementById("taskList").appendChild(taskBlock);
     }
 
 
@@ -40,3 +81,9 @@ async function makeTaskofSelectedCAT(catPOS){
 async function loadcatselect(catPOS){
 
 }
+
+async function selectTask(POS){
+
+}
+
+startProgram();

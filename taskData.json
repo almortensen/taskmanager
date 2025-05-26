@@ -1,0 +1,15 @@
+{
+    "cat":[
+        {"name":"test_cat","colorRGB":[0,0,0],"default":true,"task_List":[
+            {"taskName":"tesk_task1","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask"},
+            {"taskName":"tesk_task2","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask"},
+            {"taskName":"tesk_task3","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask"}
+        ]
+        },
+        {"name":"test_cat2","colorRGB":[225,225,225],"task_List":[
+            {"taskName":"tesk_task1","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask"},
+            {"taskName":"tesk_task2","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask"},
+            {"taskName":"tesk_task3","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask"}
+        ]}
+]
+}

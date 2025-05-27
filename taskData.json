@@ -1,15 +1,15 @@
 {
     "cat":[
         {"name":"test_cat","colorRGB":[0,0,0],"default":true,"task_List":[
-            {"taskName":"tesk_task1","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask", "POS":[0,0]},
-            {"taskName":"tesk_task2","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask", "POS":[0,1]},
-            {"taskName":"tesk_task3","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask", "POS":[0,2]}
+            {"taskName":"tesk_task1","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask", "POS":[0,0], "isDeleted":false},
+            {"taskName":"tesk_task2","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask", "POS":[0,1], "isDeleted":false},
+            {"taskName":"tesk_task3","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask", "POS":[0,2], "isDeleted":false}
         ]
         },
-        {"name":"test_cat2","colorRGB":[225,225,225],"task_List":[
-            {"taskName":"tesk_task1","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask","POS":[1,0]},
-            {"taskName":"tesk_task2","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask","POS":[1,1]},
-            {"taskName":"tesk_task3","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask","POS":[1,2]}
+        {"name":"test_cat2","colorRGB":[255,255,255],"task_List":[
+            {"taskName":"tesk_task1","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask","POS":[1,0], "isDeleted":false},
+            {"taskName":"tesk_task2","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask","POS":[1,1], "isDeleted":false},
+            {"taskName":"tesk_task3","timeSpentSEC":0,"pointsWorth":22,"discription":"testTask","POS":[1,2], "isDeleted":false}
         ]}
 ]
 }

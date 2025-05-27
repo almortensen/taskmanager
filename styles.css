@@ -8,6 +8,7 @@ body{
     background-color: rgb(20,20,20);
     display: grid;
     grid-template-columns: 25% 25% 50%;
+    color:white;
 }
 #catList{
     grid-column: 1;

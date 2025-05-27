@@ -1,3 +1,5 @@
+let isTrackingTime = false;
+
 // this runs when the app start
 async function startProgram(){
     const data = await fetch('taskData.json');
@@ -14,7 +16,6 @@ async function makeTaskofSelectedCAT(catPOS){
     const data = await fetch('taskData.json');
     let dataJSON = await data.json();
     for(task of dataJSON.cat[catPOS].task_List){
-        console.log(task);
         let taskBlock = document.createElement("div");
         taskBlock.style.backgroundColor = "rgb(22,22,22)";
         taskBlock.style.display = "grid"
@@ -66,10 +67,12 @@ async function makeTaskofSelectedCAT(catPOS){
         selectTask.style.gridRow = "2";
         selectTask.style.gridColumn = "2";
         selectTask.style.width = '100%';
-        selectTask.addEventListener("click",selectTask(task.POS));
-
+        const CatPOS = task.POS[0];
+        const taskPOS = task.POS[1];
+        selectTask.dataset.catPos = CatPOS;
+        selectTask.dataset.taskPos = taskPOS;
+        selectTask.addEventListener("click",loadSelectedTask);
         taskBlock.appendChild(selectTask);
-       
        
         
         document.getElementById("taskList").appendChild(taskBlock);
@@ -82,8 +85,71 @@ async function loadcatselect(catPOS){
 
 }
 
-async function selectTask(POS){
+async function loadSelectedTask(){
+    const data = await fetch('taskData.json');
+    const dataJSON = await data.json();
 
+    const catPOS = this.getAttribute("data-cat-pos");
+    const taskPOS = this.getAttribute("data-task-pos");
+    
+    let container = document.createElement("div");
+    container.style.gridTemplateColumns = "25% 25% 25% 25%";
+    container.style.width = "100%"
+    container.style.borderLeftColor = "rgb(255,255,255)";
+    container.style.borderTopColor = "rgb(255,255,255)";
+
+
+    let taskName = document.createElement("h1");
+    taskName.style.gridColumnStart = "2";
+    taskName.style.gridColumnEnd = "3";
+    taskName.innerText = `${dataJSON.cat[catPOS].task_List[taskPOS].taskName}`;
+
+    let taskTime = document.createElement("h3");
+    taskTime.style.gridColumn = "1";
+    let time = dataJSON.cat[catPOS].task_List[taskPOS].timeSpentSEC;
+
+    let timeDisplay = [0,0,0];
+
+        while(time > 0){
+            if(time > 3600){
+                time -= 3600;
+                timeDisplay[0]++;
+            }else if(time > 60){
+                time -= 60;
+                timeDisplay[1]++;
+            }else if(time > 1){
+                time -= 1
+                timeDisplay[2]++;
+            }
+        }
+    taskTime.innerText = `time:${timeDisplay}`;
+
+    let pointsWorth = document.createElement("h3");
+    pointsWorth.style.gridColumn = "3";
+    pointsWorth.innerText = dataJSON.cat[catPOS].task_List[taskPOS].pointsWorth;
+
+    let discription = document.createElement("p");
+    discription.style.gridColumnStart = "1"
+    discription.innerText = dataJSON.cat[catPOS].task_List[taskPOS].discription;
+
+    let startTimerButton = document.createElement("button");
+    startTimerButton.style.gridColumn = "4";
+    startTimerButton.addEventListener("click", startTimeTrack);
+
+    container.appendChild(taskName);
+    container.appendChild(taskTime);
+    container.appendChild(pointsWorth);
+    container.appendChild(discription);
+    container.appendChild(startTimerButton);
+
+}  
+
+function startTimeTrack(){
+    if(!isTrackingTime){
+
+    }else{
+        
+    }
 }
 
 startProgram();

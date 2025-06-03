@@ -1,4 +1,10 @@
+// this is going to be where globel varables are declared
+
 let isTrackingTime = false;
+const timeTrackInterval = setInterval(TimeTrack, 1000);
+let timeTracked = 0;
+
+// end of globel varables declration
 
 // this runs when the app start
 async function startProgram(){
@@ -94,18 +100,27 @@ async function loadSelectedTask(){
     
     let container = document.createElement("div");
     container.style.gridTemplateColumns = "25% 25% 25% 25%";
+    container.style.gridTemplateRows = "auto auto auto auto";
     container.style.width = "100%"
     container.style.borderLeftColor = "rgb(255,255,255)";
     container.style.borderTopColor = "rgb(255,255,255)";
-
+    container.style.display = "grid";
+    container.setAttribute("id","selectedTaskcontainer")
 
     let taskName = document.createElement("h1");
     taskName.style.gridColumnStart = "2";
     taskName.style.gridColumnEnd = "3";
+    taskName.style.gridRow = "1";
     taskName.innerText = `${dataJSON.cat[catPOS].task_List[taskPOS].taskName}`;
 
+    let TaskTrackedTimer = document.createElement("p");
+    TaskTrackedTimer.style.gridColumn = "4";
+    TaskTrackedTimer.style.gridRow = "1";
+    TaskTrackedTimer.setAttribute("id", "trackedTime");
+    
     let taskTime = document.createElement("h3");
     taskTime.style.gridColumn = "1";
+    taskTime.style.gridRow = "2";
     let time = dataJSON.cat[catPOS].task_List[taskPOS].timeSpentSEC;
 
     let timeDisplay = [0,0,0];
@@ -122,33 +137,42 @@ async function loadSelectedTask(){
                 timeDisplay[2]++;
             }
         }
-    taskTime.innerText = `time:${timeDisplay}`;
+    taskTime.innerText = `time:${timeDisplay[0]}:${timeDisplay[1]}:${timeDisplay[2]}`;
 
     let pointsWorth = document.createElement("h3");
     pointsWorth.style.gridColumn = "3";
+    pointsWorth.style.gridRow = "2";
     pointsWorth.innerText = dataJSON.cat[catPOS].task_List[taskPOS].pointsWorth;
 
     let discription = document.createElement("p");
     discription.style.gridColumnStart = "1"
+    discription.style.gridRow = "4";
     discription.innerText = dataJSON.cat[catPOS].task_List[taskPOS].discription;
 
     let startTimerButton = document.createElement("button");
     startTimerButton.style.gridColumn = "4";
-    startTimerButton.addEventListener("click", startTimeTrack);
+    startTimerButton.style.gridRow = "3"
+    startTimerButton.addEventListener("click", () => {
+        isTrackingTime = !isTrackingTime;
+    });
 
     container.appendChild(taskName);
     container.appendChild(taskTime);
     container.appendChild(pointsWorth);
     container.appendChild(discription);
     container.appendChild(startTimerButton);
+    container.appendChild(TaskTrackedTimer);
+
+    document.getElementById("selectedTask").appendChild(container);
 
 }  
 
-function startTimeTrack(){
-    if(!isTrackingTime){
-
+function TimeTrack(){
+    if(isTrackingTime){
+        timeTracked++
+        document.getElementById("trackedTime").innerText = `time tracked ${timeTracked}`;
     }else{
-        
+        timeTracked = 0;
     }
 }
 
